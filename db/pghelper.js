@@ -4,7 +4,7 @@ const pg = require('pg'),
     config = require('./config'),
     databaseURL = config.databaseURL
 
-exports.query = (sql, values, singleItem, dontLog) => {
+    exports.query = function (sql, values, dontLog) {
 
     if (!dontLog) {
         console.log(sql, values)
@@ -20,7 +20,7 @@ exports.query = (sql, values, singleItem, dontLog) => {
                     if (err) {
                         reject(err)
                     } else {
-                        resolve(singleItem ? result.rows[0] : result.rows)
+                        resolve(result.rows)
                     }
                 })
             }
