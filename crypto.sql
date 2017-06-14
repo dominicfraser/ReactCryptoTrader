@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS tests;
+
+
+CREATE TABLE tests(
+id SERIAL2 PRIMARY KEY,
+name VARCHAR(255)
+);
+
