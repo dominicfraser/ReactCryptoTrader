@@ -1,0 +1,20 @@
+{
+  "name": "express_server",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha client/src/models/specs",
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.1",
+    "pg": "^6.0.2"
+  },
+  "devDependencies": {
+    "mocha": "^3.4.2"
+    },
+  "description": ""
+}
