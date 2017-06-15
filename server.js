@@ -22,7 +22,10 @@ const server = app.listen(3000, function () {
 
 
 // setInterval(() => {
-//   //Hit crpyto api
+  // Hit crpyto api
 //   //add to db
+
+  // const url = 'https://min-api.cryptocompare.com/data/pricemulti?fsyms=ETH,BTC&tsyms=ETH,BTC,USD,EUR,GBP'
+
 // } , 10000)
 
