@@ -22,7 +22,6 @@ const findById = (req, res, next) => {
 const add = (req, res, next) => {
   const sql = "INSERT INTO tests (name) VALUES ($1) RETURNING *"
 
-  console.log(req);
   const name = req.body.name
 
   db.query(sql, [name])
