@@ -1,5 +1,8 @@
 import React from 'react'
-import ChartContainer from '../containers/chartContainer'
+import IntradayAreaChart from '../components/intradayAreaChart'
+
+var usdeur = require('./usdeur')
+
 
 class Main extends React.Component {
   constructor(props){
@@ -14,8 +17,9 @@ class Main extends React.Component {
     return (
       <div>
         <h1> Main Test </h1>
+        <IntradayAreaChart data={usdeur}/>
         <h2>test</h2>
-        <ChartContainer />
+
       </div>
       )
   }
