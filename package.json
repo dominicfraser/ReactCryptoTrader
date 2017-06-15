@@ -10,11 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.1",
+    "express": "^4.13.4",
     "pg": "^6.0.2"
   },
   "devDependencies": {
-    "mocha": "^3.4.2"
+    "mocha": "^3.4.2",
+    "body-parser": "^1.15.2"
     },
   "description": ""
 }
