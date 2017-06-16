@@ -2,7 +2,7 @@
 const db = require('./pgHelper')
 
 const findAll = (req, res, next) => {
-  const sql = "SELECT * FROM tests ORDER BY id ASC"
+  const sql = "SELECT * FROM BTC ORDER BY id ASC"
 
   db.query(sql, [])
       .then(test => res.json(test))
@@ -19,23 +19,37 @@ const findById = (req, res, next) => {
       .catch(next)
 }
 
-const add = (req, res, next) => {
-  const sql = "INSERT INTO tests (BASE, ETH, BTC, USD, EUR, GBP, tstamp_unix) VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *"
+const addFromServerToCurrencies = (req) => {
+  const tstamp_unix = Date.now() 
 
-  const BASE = req.body.BASE
-  const ETH = req.body.ETH
-  const BTC = req.body.BTC
-  const USD = req.body.USD
-  const EUR = req.body.EUR
-  const GBP = req.body.GBP
-  const tstamp_unix = Date.now()
+  const sql = "INSERT INTO BTC (ETH, BTC, USD, EUR, GBP, tstamp_unix) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *"
+  
+  const BASE = "BTC"
+  const ETH2 = req.BTC.ETH
+  const BTC2 = req.BTC.BTC
+  const USD2 = req.BTC.USD
+  const EUR2 = req.BTC.EUR
+  const GBP2 = req.BTC.GBP
 
-  db.query(sql, [BASE, ETH, BTC, USD, EUR, GBP, tstamp_unix])
-      .then(test => res.json(test[0]))
-      .catch(next)
-}
+  db.query(sql, [ETH2, BTC2, USD2, EUR2, GBP2, tstamp_unix])
+      .then()
+      .catch()
 
+  // const sql2 = "INSERT INTO ETH (ETH, BTC, USD, EUR, GBP, tstamp_unix) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *"
+
+  // const BASE2 = "ETH"
+  // const ETH2 = req.ETH.ETH
+  // const BTC2 = req.ETH.BTC
+  // const USD2 = req.ETH.USD
+  // const EUR2 = req.ETH.EUR
+  // const GBP2 = req.ETH.GBP
+
+  // db.query(sql, [ETH2, BTC2, USD2, EUR2, GBP2, tstamp_unix])
+  //     .then()
+  //     .catch()
+
+  }
 
 exports.findAll = findAll
 exports.findById = findById
-exports.add = add
+exports.addFromServerToCurrencies = addFromServerToCurrencies

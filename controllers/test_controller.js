@@ -7,7 +7,7 @@ testRouter.get('/', query.findAll)
 
 testRouter.get('/:id', query.findById)
 
-testRouter.post('/', query.add)
+// testRouter.post('/', query.addFromClientUSERDOSOMETHING)
 
 
 module.exports = testRouter

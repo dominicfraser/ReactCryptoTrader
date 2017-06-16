@@ -1,5 +1,4 @@
 import React from 'react'
-// import ReactDOM from 'react-dom'
 import Highcharts from 'highcharts/highstock'
 import HighchartsGeneric from '../components/highchartsGeneric'
 
@@ -9,11 +8,12 @@ class IntradayAreaChart extends React.Component {
   }
 
   render(){
+console.log('render intradayAreaChart')
     const elementToAttachToName = 'stockChart'
 
     const options = {
       title: {
-          text: 'stock price by minute'
+          text: 'BTC/GBP over time'
       },
 
       subtitle: {

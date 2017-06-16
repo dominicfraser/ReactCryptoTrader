@@ -2,6 +2,8 @@ const express = require('express')
 const https = require('https')
 const app = express()
 const path = require('path')
+const query = require('./db/dbQueryHelper.js')
+
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -23,11 +25,8 @@ const server = app.listen(3000, function () {
 
 
 setInterval(() => {
-  // Hit crpyto api
-//   //add to db
+  // Hit crpyto api //add to db
   const url = 'https://min-api.cryptocompare.com/data/pricemulti?fsyms=ETH,BTC&tsyms=ETH,BTC,USD,EUR,GBP'
-
-
 
   https.get(url, (res) => {
     const { statusCode } = res;
@@ -54,7 +53,9 @@ setInterval(() => {
       res.on('end', () => {
         try {
           const parsedData = JSON.parse(rawData);
-          console.log(parsedData);
+console.log('external api data', parsedData);
+            query.addFromServerToCurrencies(parsedData)
+
         } catch (e) {
           console.error(e.message);
         }
