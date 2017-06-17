@@ -25,3 +25,4 @@ tstamp_unix INT8 DEFAULT (extract(epoch from now())*1000),
 tstamp_readable TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+1497644467980 | 2017-06-16 21:21:07.980835

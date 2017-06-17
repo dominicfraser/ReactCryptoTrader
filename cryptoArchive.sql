@@ -1,0 +1,49 @@
+DROP TABLE IF EXISTS BTC_DAILY;
+DROP TABLE IF EXISTS ETH_DAILY;
+DROP FUNCTION IF EXISTS convert_unix_to_timestamptz();
+
+
+
+CREATE TABLE BTC_DAILY(
+id SERIAL2 PRIMARY KEY,
+ETH DECIMAL,
+BTC DECIMAL,
+USD DECIMAL,
+EUR DECIMAL,
+GBP DECIMAL,
+tstamp_unix INT8,
+tstamp_readable TIMESTAMPTZ 
+);
+
+
+CREATE TABLE ETH_DAILY(
+id SERIAL2 PRIMARY KEY,
+ETH DECIMAL,
+BTC DECIMAL,
+USD DECIMAL,
+EUR DECIMAL,
+GBP DECIMAL,
+tstamp_unix INT8,
+tstamp_readable TIMESTAMPTZ
+);
+
+
+
+CREATE OR REPLACE FUNCTION convert_unix_to_timestamptz()
+RETURNS TRIGGER AS $d$
+DECLARE 
+unix INT8 = NEW.tstamp_unix;
+tstamp_converted_readable TIMESTAMPTZ := (
+  SELECT TIMESTAMP WITH TIME ZONE 'epoch' + unix/1000 * INTERVAL '1 second'
+);
+
+BEGIN
+NEW.tstamp_readable = tstamp_converted_readable;
+RETURN NEW;
+END;
+$d$ LANGUAGE plpgsql;
+
+CREATE TRIGGER convert_unix
+BEFORE INSERT ON BTC_DAILY
+FOR EACH ROW
+EXECUTE PROCEDURE convert_unix_to_timestamptz();

@@ -4,7 +4,8 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha client/src/models/specs",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "archive": "nodemon serverArchive.js"
   },
   "keywords": [],
   "author": "",

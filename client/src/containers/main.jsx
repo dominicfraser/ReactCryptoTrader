@@ -1,6 +1,7 @@
 import React from 'react'
 import IntradayAreaChart from '../components/intradayAreaChart'
 // import RateTimeArrayModel from '../models/RateTimeArrayModel'
+// import AppBar from 'react-toolbox/lib/app_bar';
 
 var usdeur = require('./usdeur')
 import ApiCommunicatorHelper from '../helpers/apiCommunicatorHelper'

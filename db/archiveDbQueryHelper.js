@@ -2,21 +2,19 @@
 
 const pg = require('pg'),
     config = require('./config'),
-    databaseURL = config.databaseURL
+    databaseURL = "postgres://user@localhost/cryptoArchive"
 
-    exports.query = function (sql, values, dontLog) {
-
+    const query = function (sql, values, dontLog) {
     if (!dontLog) {
 console.log(sql, values)
     }
-
     return new Promise((resolve, reject) => {
-
         pg.connect(databaseURL, function (err, conn, done) {
             if (err) return reject(err)
             try {
                 conn.query(sql, values, function (err, result) {
                     done()
+
                     if (err) {
                         reject(err)
                     } else {
@@ -32,3 +30,25 @@ console.log(sql, values)
     })
 }
 
+const addHistDailyData = (apiRateInfo, day) => {
+
+    const tstamp_unix = day
+
+    const sql = "INSERT INTO BTC_DAILY (ETH, BTC, USD, EUR, GBP, tstamp_unix) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *"
+    
+    const BASE = "BTC"
+    const ETH2 = apiRateInfo.BTC.ETH
+    const BTC2 = apiRateInfo.BTC.BTC
+    const USD2 = apiRateInfo.BTC.USD
+    const EUR2 = apiRateInfo.BTC.EUR
+    const GBP2 = apiRateInfo.BTC.GBP
+
+    query(sql, [ETH2, BTC2, USD2, EUR2, GBP2, tstamp_unix])
+        .then()
+        .catch()
+
+}
+
+
+
+exports.addHistDailyData = addHistDailyData
