@@ -17,11 +17,10 @@ console.log('render highchartsGeneric')
 
   componentWillReceiveProps(newprops) {
 console.log('componentWillReceiveProps')
-console.log('newprops.options.series[0].data', newprops.options.series[0].data);
+// console.log('newprops.options.series[0].data', newprops.options.series[0].data);
 
     this.chart.series[0].setData(newprops.options.series[0].data)
 
-    this.chart.xAxis[0].setExtremes(new Date().setMinutes(new Date().getMinutes()-5), new Date().getTime())
   }
 
   componentDidMount(){
@@ -31,6 +30,9 @@ console.log('options', this.props.options.series[0].data)
 
     this.chart = new Highcharts[this.props.type || 'Chart'](
       elementToAttachTo, this.props.options)
+//set starting extremes, buttons override this
+    this.chart.xAxis[0].setExtremes(new Date().setMinutes(new Date().getMinutes()-5), new Date().getTime())
+
   }
 
   componentWillUnMount(){

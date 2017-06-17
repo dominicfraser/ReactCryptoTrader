@@ -26,6 +26,10 @@ console.log('render intradayAreaChart')
 
       rangeSelector: {
           buttons: [{
+              type: 'minute',
+              count: 1,
+              text: '1m'
+          }, {
               type: 'hour',
               count: 1,
               text: '1h'
@@ -36,8 +40,13 @@ console.log('render intradayAreaChart')
           }, {
               type: 'all',
               count: 1,
-              text: 'All'
+              text: 'All',
+              // dataGrouping: {
+              //     forced: true,
+              //     units: [['month', [1]]]
+              // }
           }],
+          //this is overridden with getExtremes - use this when which button is known to be default 
           selected: 1,
           inputEnabled: false
       },
@@ -63,7 +72,11 @@ console.log('render intradayAreaChart')
               ]
           },
           threshold: null
-      }]
+      }],
+
+      credits: {
+              enabled: false
+          },
    }
 
 

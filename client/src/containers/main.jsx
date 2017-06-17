@@ -44,7 +44,7 @@ console.log('render main')
       const toRateCode = rateObject[rateCode] * 1
       return [time, toRateCode]
     })
-console.log('data after map', data)
+// console.log('data after map', data)
     this.setState({ data: data }) 
   }
 
