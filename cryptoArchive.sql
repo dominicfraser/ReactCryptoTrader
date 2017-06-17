@@ -1,10 +1,8 @@
-DROP TABLE IF EXISTS BTC_DAILY;
-DROP TABLE IF EXISTS ETH_DAILY;
-DROP FUNCTION IF EXISTS convert_unix_to_timestamptz();
+DROP TABLE IF EXISTS btc_daily;
+DROP TABLE IF EXISTS eth_daily;
+DROP FUNCTION IF EXISTS con_unix_check_duplicate();
 
-
-
-CREATE TABLE BTC_DAILY(
+CREATE TABLE btc_daily(
 id SERIAL2 PRIMARY KEY,
 ETH DECIMAL,
 BTC DECIMAL,
@@ -16,7 +14,7 @@ tstamp_readable TIMESTAMPTZ
 );
 
 
-CREATE TABLE ETH_DAILY(
+CREATE TABLE eth_daily(
 id SERIAL2 PRIMARY KEY,
 ETH DECIMAL,
 BTC DECIMAL,
@@ -29,7 +27,7 @@ tstamp_readable TIMESTAMPTZ
 
 
 
-CREATE OR REPLACE FUNCTION convert_unix_to_timestamptz()
+CREATE OR REPLACE FUNCTION con_unix_check_duplicate()
 RETURNS TRIGGER AS $d$
 DECLARE 
 unix INT8 = NEW.tstamp_unix;
@@ -38,12 +36,17 @@ tstamp_converted_readable TIMESTAMPTZ := (
 );
 
 BEGIN
+IF (SELECT COUNT(*) FROM btc_daily WHERE tstamp_unix = NEW.tstamp_unix) > 0 THEN
+RAISE EXCEPTION 'Duplicate Entry, Insert Aborted';
+END IF;
+
+
 NEW.tstamp_readable = tstamp_converted_readable;
 RETURN NEW;
 END;
 $d$ LANGUAGE plpgsql;
 
 CREATE TRIGGER convert_unix
-BEFORE INSERT ON BTC_DAILY
+BEFORE INSERT ON btc_daily
 FOR EACH ROW
-EXECUTE PROCEDURE convert_unix_to_timestamptz();
+EXECUTE PROCEDURE con_unix_check_duplicate();

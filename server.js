@@ -2,7 +2,8 @@ const express = require('express')
 const https = require('https')
 const app = express()
 const path = require('path')
-const query = require('./db/dbQueryHelper.js')
+const dbQueryHelper = require('./db/dbQueryHelper.js')
+const query = new dbQueryHelper
 const HttpsRequestHelper = require('./db/httpsRequestHelper')
 
 
