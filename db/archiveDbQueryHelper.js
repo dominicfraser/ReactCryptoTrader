@@ -34,7 +34,7 @@ const addHistDailyData = (apiRateInfo, day) => {
 
     const tstamp_unix = day
 
-    const sql = "INSERT INTO BTC_DAILY (ETH, BTC, USD, EUR, GBP, tstamp_unix) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *"
+    const sql = "INSERT INTO btc_daily (ETH, BTC, USD, EUR, GBP, tstamp_unix) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *"
     
     const BASE = "BTC"
     const ETH2 = apiRateInfo.BTC.ETH
@@ -49,6 +49,15 @@ const addHistDailyData = (apiRateInfo, day) => {
 
 }
 
+const findAll = (req, res, next) => {
+  const sql = "SELECT * FROM btc_daily ORDER BY id ASC"
+
+  query(sql, [])
+      .then(test => res.json(test))
+      .catch(next)
+}
+
 
 
 exports.addHistDailyData = addHistDailyData
+exports.findAll = findAll
