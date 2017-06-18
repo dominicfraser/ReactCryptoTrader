@@ -18,8 +18,8 @@ const server = app.listen(4000, function () {
 
 //// logic to fill up hist data, move when next mvp met
 const dayLength = 86400000
-//17June[takes one lower]2017
-const startDate = Date.UTC(2017, 5, 17)
+//18June[takes one lower]2017
+const startDate = Date.UTC(2017, 5, 18)
 const urlsToRequest = []
 
 for(let iDate = startDate; iDate > 1310598000000; iDate-=dayLength){

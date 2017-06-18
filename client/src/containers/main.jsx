@@ -1,5 +1,6 @@
 import React from 'react'
 import IntradayAreaChart from '../components/intradayAreaChart'
+import CandlestickChart from '../components/candlestickChart'
 // import RateTimeArrayModel from '../models/RateTimeArrayModel'
 // import AppBar from 'react-toolbox/lib/app_bar';
 
@@ -43,7 +44,7 @@ console.log('render main')
   callApiThenMapResult(){
     this.ApiCommunicatorHelper.allBTC10SecRates((rates) => { this.convertToRateTimeArray(rates, "GBPRate",  this.addToRecentDataState)} )
 
-    this.ApiCommunicatorHelper.allBTCHistDailyRates((rates) => { this.convertToRateTimeArray(rates, "GBPRate", this.addToHistDataState)} )
+    // this.ApiCommunicatorHelper.allBTCHistDailyRates((rates) => { this.convertToRateTimeArray(rates, "GBPRate", this.addToHistDataState)} )
   }
 
   convertToRateTimeArray(rates, rateCode, callback){
