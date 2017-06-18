@@ -23,10 +23,15 @@ class Main extends React.Component {
   }
 
   render(){
+    let currentPrice = "waiting for update"
+    if (this.state.allData.length !== 0){currentPrice = this.state.allData[this.state.allData.length-1][1]}
+
+
 console.log('render main')
     return (
       <div>
         <h1> Main Test </h1>
+        <p> Current Price: {currentPrice} </p>
         <IntradayAreaChart data={this.state.allData}/>
         <h2> test </h2>
       </div>
