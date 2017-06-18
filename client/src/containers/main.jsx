@@ -10,10 +10,15 @@ class Main extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      newData: [1]
+      allData: [],
+      recentData: [],
+      histData: []
     }
     
     this.ApiCommunicatorHelper = new ApiCommunicatorHelper()
+
+    this.addToRecentDataState = this.addToRecentDataState.bind(this)
+    this.addToHistDataState = this.addToHistDataState.bind(this)
   }
 
   render(){
@@ -21,7 +26,7 @@ console.log('render main')
     return (
       <div>
         <h1> Main Test </h1>
-        <IntradayAreaChart data={this.state.data}/>
+        <IntradayAreaChart data={this.state.allData}/>
         <h2> test </h2>
       </div>
       )
@@ -36,29 +41,42 @@ console.log('render main')
 
 
   callApiThenMapResult(){
-    const recentRates = this.ApiCommunicatorHelper.allBTC10SecRates((rates) => { this.convertToRateTimeArray(rates, "GBPRate")} )
-console.log('recentRates', recentRates)
+    this.ApiCommunicatorHelper.allBTC10SecRates((rates) => { this.convertToRateTimeArray(rates, "GBPRate",  this.addToRecentDataState)} )
 
-    const histRates = this.ApiCommunicatorHelper.allBTCHistDailyRates((rates) => { this.convertToRateTimeArray(rates, "GBPRate")} )
-
-    const combinedRates = [...recentRates, ...histRates]
-    this.setState({ data: combinedRates }) 
-    
-
-    // return combinedRates
-    return recentRates
+    this.ApiCommunicatorHelper.allBTCHistDailyRates((rates) => { this.convertToRateTimeArray(rates, "GBPRate", this.addToHistDataState)} )
   }
 
-  convertToRateTimeArray(rates, rateCode){
+  convertToRateTimeArray(rates, rateCode, callback){
     const data = rates.map((rateObject) => {
       const time = rateObject.tstamp_unix * 1
       const toRateCode = rateObject[rateCode] * 1
       return [time, toRateCode]
     })
 console.log('data after map', data)
-
-    return data
+    callback(data)
   }
+
+  addToRecentDataState(newData){
+    this.setState({ recentData: newData })
+
+    const histData = this.state.histData.slice()
+
+    let combinedRates = [...newData, ...histData]
+    combinedRates = combinedRates.sort(this.compareDatesInNestedArray)
+    this.setState({ allData: combinedRates })
+// console.log('combinedRates after sort', combinedRates) 
+  }
+
+  addToHistDataState(newData){
+    this.setState({ histData: newData })
+  }
+
+  compareDatesInNestedArray(a, b) {
+    if (a[0] < b[0]) return -1;
+    if (a[0] > b[0]) return 1;
+    return 0;
+  }
+
 
 }
 

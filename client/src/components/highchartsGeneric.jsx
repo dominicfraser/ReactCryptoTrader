@@ -20,7 +20,6 @@ console.log('componentWillReceiveProps')
 // console.log('newprops.options.series[0].data', newprops.options.series[0].data);
 
     this.chart.series[0].setData(newprops.options.series[0].data)
-
   }
 
   componentDidMount(){
