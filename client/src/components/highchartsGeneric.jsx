@@ -30,7 +30,7 @@ console.log('options', this.props.options.series[0].data)
     this.chart = new Highcharts[this.props.type || 'Chart'](
       elementToAttachTo, this.props.options)
 //set starting extremes, buttons override this
-    this.chart.xAxis[0].setExtremes(new Date().setMinutes(new Date().getMinutes()-5), new Date().getTime())
+    // this.chart.xAxis[0].setExtremes(new Date().setMinutes(new Date().getMinutes()-5), new Date().getTime())
 
   }
 

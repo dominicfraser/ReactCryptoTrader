@@ -43,11 +43,11 @@ console.log('render intradayAreaChart')
               text: 'All',
               // dataGrouping: {
               //     forced: true,
-              //     units: [['month', [1]]]
+              //     units: [['day', [1]]]
               // }
           }],
           //this is overridden with getExtremes - use this when which button is known to be default 
-          selected: 1,
+          selected: 3,
           inputEnabled: false
       },
 
