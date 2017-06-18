@@ -45,7 +45,6 @@ console.log('https data', parsedData);
   }
 
 //// ARCHIVE FILL METHOD
-
   archiveDayRatesRequest(urlPair, urlsArray, dateBeingLookedAt){
     https.get(urlPair[0], (res) => {
       const { statusCode } = res;

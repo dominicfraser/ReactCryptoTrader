@@ -21,7 +21,8 @@ console.log('render intradayAreaChart')
       },
 
       xAxis: {
-          gapGridLineWidth: 0
+          gapGridLineWidth: 0,
+          // ordinal: false
       },
 
       rangeSelector: {
@@ -43,11 +44,10 @@ console.log('render intradayAreaChart')
               text: 'All',
               // dataGrouping: {
               //     forced: true,
-              //     units: [['day', [1]]]
+              //     units: [['hour', [1]]]
               // }
           }],
-          //this is overridden with getExtremes - use this when which button is known to be default 
-          selected: 3,
+          selected: 2,
           inputEnabled: false
       },
 
@@ -55,9 +55,9 @@ console.log('render intradayAreaChart')
           name: 'AAPL',
           type: 'area',
           data: this.props.data,
-          gapSize: 5,
+          // gapSize: 5,
           tooltip: {
-              valueDecimals: 2
+              // valueDecimals: 2
           },
           fillColor: {
               linearGradient: {
@@ -75,7 +75,10 @@ console.log('render intradayAreaChart')
       }],
 
       credits: {
-              enabled: false
+              enabled: true,
+              href: "https://www.cryptocompare.com/api/?javascript#introduction",
+              style: { "cursor": "pointer", "color": "#999999", "fontSize": "10px" },
+              text: "Market data by cryptocompare.com"
           },
    }
 
