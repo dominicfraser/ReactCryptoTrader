@@ -10,7 +10,7 @@ class Main extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      data: [1]
+      newData: [1]
     }
     
     this.ApiCommunicatorHelper = new ApiCommunicatorHelper()
@@ -36,7 +36,17 @@ console.log('render main')
 
 
   callApiThenMapResult(){
-    this.ApiCommunicatorHelper.allBTC10SecRates((rates) => { this.convertToRateTimeArray(rates, "GBPRate")} )
+    const recentRates = this.ApiCommunicatorHelper.allBTC10SecRates((rates) => { this.convertToRateTimeArray(rates, "GBPRate")} )
+console.log('recentRates', recentRates)
+
+    const histRates = this.ApiCommunicatorHelper.allBTCHistDailyRates((rates) => { this.convertToRateTimeArray(rates, "GBPRate")} )
+
+    const combinedRates = [...recentRates, ...histRates]
+    this.setState({ data: combinedRates }) 
+    
+
+    // return combinedRates
+    return recentRates
   }
 
   convertToRateTimeArray(rates, rateCode){
@@ -45,8 +55,9 @@ console.log('render main')
       const toRateCode = rateObject[rateCode] * 1
       return [time, toRateCode]
     })
-// console.log('data after map', data)
-    this.setState({ data: data }) 
+console.log('data after map', data)
+
+    return data
   }
 
 }

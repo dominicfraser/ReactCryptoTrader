@@ -12,6 +12,13 @@ class ApiCommunicatorHelper {
       callback(BTCRates)
     })
   }
+
+  allBTCHistDailyRates(callback){
+    this.apiRequestHelper.makeGetRequest("http://localhost:3000/api/tests/archive", (results) => {
+      const BTCRates = this.populateRates(results)
+      callback(BTCRates)
+    })
+  }
   
 
   populateRates(results){
