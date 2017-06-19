@@ -1,7 +1,7 @@
 import React from 'react'
 import IntradayAreaChart from '../components/intradayAreaChart'
 import CandlestickChart from '../components/candlestickChart'
-// import AppBar from 'react-toolbox/lib/app_bar';
+import AppBar from 'react-toolbox/lib/app_bar';
 
 var usdeur = require('./usdeur')
 import ApiCommunicatorHelper from '../helpers/apiCommunicatorHelper'
@@ -29,6 +29,7 @@ class Main extends React.Component {
 console.log('render main')
     return (
       <div>
+        <AppBar title='React Toolbox'> </AppBar>
         <h1> Main Test </h1>
         <p> Current Price: {currentPrice} </p>
         <IntradayAreaChart data={this.state.allData}/>
